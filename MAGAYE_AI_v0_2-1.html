@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b121a">
+<title>MAGAYE AI | Market Learning Studio</title>
+<style>
+:root{--bg:#0b121a;--panel:#121e2a;--panel2:#192938;--line:#2a3b4b;--txt:#edf5f8;--muted:#9aabba;--green:#43d6a0;--amber:#f1c875;--blue:#82b8ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#1a3a35 0,transparent 38%),var(--bg);color:var(--txt);font:15px system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:820px;margin:auto;padding:18px 14px 42px}.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0 18px}
+.brand{font-weight:900;font-size:25px;letter-spacing:2px}.brand em{font-style:normal;color:var(--green)}.sub{font-size:10px;letter-spacing:1.7px;color:var(--muted)}
+.pill{border:1px solid #37614f;border-radius:22px;padding:7px 10px;color:var(--green);font-size:10px;font-weight:800;white-space:nowrap}
+.notice{padding:12px 13px;border-radius:12px;background:#302a1d;border:1px solid #68552f;color:#f4dfb0;font-size:12px;line-height:1.55}
+h2{font-size:16px;margin:21px 0 10px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.market{width:100%;text-align:left;color:var(--txt);background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:13px;cursor:pointer}
+.market.active{border-color:var(--green);box-shadow:0 0 0 1px #43d6a033}.market b{display:block;font-size:15px}.market small{color:var(--muted)}
+.tag{display:inline-block;margin-top:8px;padding:4px 8px;border-radius:20px;background:#203a32;color:var(--green);font-size:10px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:14px;margin-top:11px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.big{font-size:24px;font-weight:800}.status{font-size:10px;padding:6px 9px;border-radius:20px;background:#203a32;color:var(--green)}
+.chart{display:block;width:100%;height:165px;background:linear-gradient(180deg,#152921,#111d28);border-radius:10px;margin-top:12px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}.tabs button,.action{border:1px solid var(--line);background:var(--panel2);color:var(--txt);padding:8px 11px;border-radius:9px;font-size:11px}.tabs button.active{border-color:var(--green);color:var(--green)}
+.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.metric{padding:11px;border-radius:11px;background:var(--panel2)}.metric b{display:block;margin-bottom:4px}.metric span{font-size:12px;color:var(--muted);line-height:1.4}
+.tfgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.tf{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 5px;text-align:center}.tf b{display:block;font-size:13px}.tf span{font-size:10px;color:var(--muted)}
+.note{background:#202a2d;border-left:3px solid var(--amber);border-radius:8px;padding:11px 12px;font-size:12px;line-height:1.55}
+.newsitem{padding:11px 0;border-bottom:1px solid var(--line)}.newsitem:last-child{border:0;padding-bottom:0}.newsitem b{font-size:13px}.newsitem p{margin:5px 0 0;font-size:12px;color:var(--muted);line-height:1.5}
+.label{font-size:10px;letter-spacing:1px;color:var(--blue);font-weight:800}
+footer{text-align:center;color:var(--muted);font-size:10px;line-height:1.6;margin-top:23px}
+@media(max-width:390px){.brand{font-size:22px}.tfgrid{gap:4px}.tf{padding:8px 2px}.big{font-size:21px}}
+</style></head>
+<body><main>
+<header class="top"><div><div class="brand">MAGAYE <em>AI</em></div><div class="sub">MARKET LEARNING STUDIO · V0.2</div></div><div class="pill">EDUCATION MODE</div></header>
+<div class="notice"><b>Important:</b> This is an educational prototype. All displayed prices, chart patterns, indicator readings and news examples are fictional. It is not connected to Exness or MT5, does not provide live signals, and cannot place orders.</div>
+
+<h2>Market watch</h2><section class="grid" id="markets">
+<button class="market active" data-market="EUR/USD"><b>EUR/USD</b><small>Euro / US Dollar</small><br><span class="tag">FOREX</span></button>
+<button class="market" data-market="GBP/USD"><b>GBP/USD</b><small>Pound / US Dollar</small><br><span class="tag">FOREX</span></button>
+<button class="market" data-market="XAU/USD"><b>XAU/USD</b><small>Gold / US Dollar</small><br><span class="tag">METAL</span></button>
+<button class="market" data-market="BTC/USD"><b>BTC/USD</b><small>Bitcoin / US Dollar</small><br><span class="tag">CRYPTO</span></button>
+</section>
+
+<h2>Illustrative price chart</h2><section class="card">
+<div class="row"><div><div class="muted" id="marketName">EUR/USD · SAMPLE DATA</div><div class="big" id="price">1.08420</div></div><span class="status" id="trend">NEUTRAL SAMPLE</span></div>
+<canvas class="chart" id="chart" aria-label="Fictional illustrative price chart"></canvas>
+<div class="tabs" id="timeframes"><button class="active" data-tf="M5">M5</button><button data-tf="M15">M15</button><button data-tf="M30">M30</button><button data-tf="H1">H1</button><button data-tf="H4">H4</button></div>
+<p class="muted" style="font-size:10px;margin-bottom:0">Sample visualization only. Not a live price feed.</p></section>
+
+<h2>Multiple-timeframe study</h2><section class="card"><div class="tfgrid">
+<div class="tf"><b>M5</b><span id="tfM5">Mixed</span></div><div class="tf"><b>M15</b><span id="tfM15">Mixed</span></div><div class="tf"><b>M30</b><span id="tfM30">Mixed</span></div><div class="tf"><b>H1</b><span id="tfH1">Mixed</span></div><div class="tf"><b>H4</b><span id="tfH4">Mixed</span></div>
+</div><p class="muted" style="font-size:11px;margin-bottom:0">Use shorter timeframes to study detail and longer timeframes for broader context. These labels are illustrative, not calculated from market data.</p></section>
+
+<h2>Indicator learning panel</h2><section class="metrics">
+<div class="metric"><b>RSI</b><span id="rsi">52 · Middle range</span></div><div class="metric"><b>MACD</b><span id="macd">Near zero · Mixed</span></div>
+<div class="metric"><b>Moving average</b><span id="ma">Price near average</span></div><div class="metric"><b>Volatility</b><span id="vol">Sample: moderate</span></div>
+</section>
+<h2>Magaye study note</h2><div class="note" id="analysis">The fictional readings are mixed. Study whether momentum and the broader direction agree. No trading decision is generated.</div>
+
+<h2>Economic news awareness</h2><section class="card">
+<div class="row"><b>Event watch</b><span class="pill">SAMPLE ONLY</span></div>
+<div class="newsitem"><div class="label">CENTRAL BANKS</div><b>Interest-rate announcement</b><p>Central-bank decisions and guidance can influence currency markets and gold. Review the official release and its timestamp when studying a real event.</p></div>
+<div class="newsitem"><div class="label">ECONOMIC DATA</div><b>Inflation and employment reports</b><p>Inflation and jobs data can affect expectations about interest rates. The market response is uncertain and may differ from expectations.</p></div>
+<div class="newsitem"><div class="label">CRYPTO MARKETS</div><b>Digital-asset headlines</b><p>Regulatory, exchange and network news can affect crypto-market volatility. Check multiple reliable sources before drawing conclusions.</p></div>
+<p class="muted" style="font-size:10px;margin-bottom:0">No live calendar or news feed is connected. This panel contains general learning examples, not upcoming event listings.</p>
+</section>
+
+<h2>Learn the tools</h2><section class="card">
+<p><b>RSI</b><br><span class="muted">A momentum measure from 0 to 100. Common reference levels such as 70 and 30 are not automatic buy or sell instructions.</span></p>
+<p><b>MACD</b><br><span class="muted">Compares moving averages to help study momentum and possible changes in direction.</span></p>
+<p><b>Moving average</b><br><span class="muted">Smooths historical prices to make a broader direction easier to inspect.</span></p>
+<p style="margin-bottom:0"><b>Volatility</b><br><span class="muted">Describes the size and speed of price changes. Volatility can increase around important news.</span></p>
+</section>
+<footer>MAGAYE AI · V0.2 · OFFLINE EDUCATIONAL PROTOTYPE<br>Not affiliated with Exness or MetaTrader 5. No live data, recommendations, broker login or trade execution.</footer>
+</main>
+<script>
+const samples={
+"EUR/USD":{price:"1.08420",rsi:"52 · Middle range",macd:"Near zero · Mixed momentum",ma:"Price near average",vol:"Sample: moderate",trend:"NEUTRAL SAMPLE",note:"The fictional readings are mixed. Study whether momentum and the broader direction agree. No trading decision is generated.",seed:2,tf:["Mixed","Mixed","Mixed","Mixed","Mixed"]},
+"GBP/USD":{price:"1.27150",rsi:"61 · Mid-to-upper range",macd:"Slightly positive sample",ma:"Sample price above average",vol:"Sample: moderate",trend:"UPWARD SAMPLE",note:"This fictional example shows positive momentum. Compare the sample readings across timeframes and remember that indicators can disagree.",seed:5,tf:["Mixed","Up*","Up*","Up*","Mixed"]},
+"XAU/USD":{price:"2,345.60",rsi:"47 · Middle range",macd:"Near zero · Mixed momentum",ma:"Price near average",vol:"Sample: higher",trend:"NEUTRAL SAMPLE",note:"This gold example has mixed sample readings and higher illustrative volatility. Study how volatility can make price movements larger.",seed:8,tf:["Mixed","Mixed","Mixed","Mixed","Mixed"]},
+"BTC/USD":{price:"67,250.00",rsi:"68 · Upper range",macd:"Positive sample momentum",ma:"Sample price above average",vol:"Sample: high",trend:"UPWARD SAMPLE",note:"This fictional Bitcoin example has stronger sample momentum and high illustrative volatility. It is not a forecast or trading signal.",seed:11,tf:["Mixed","Up*","Up*","Up*","Mixed"]}
+};
+let selected="EUR/USD",tf="M5";const $=id=>document.getElementById(id);
+function draw(seed){const c=$("chart"),dpr=devicePixelRatio||1,w=c.clientWidth,h=c.clientHeight;c.width=w*dpr;c.height=h*dpr;const x=c.getContext("2d");x.scale(dpr,dpr);x.strokeStyle="#2a3b4b";x.lineWidth=1;for(let i=1;i<4;i++){x.beginPath();x.moveTo(0,h*i/4);x.lineTo(w,h*i/4);x.stroke()}let vals=[],v=h*.55;for(let i=0;i<42;i++){v+=Math.sin(i*.63+seed)*5+Math.cos(i*.21+seed)*3+(i%9===0?4:-1);vals.push(v)}x.beginPath();vals.forEach((p,i)=>{let px=i*(w-12)/41+6,py=Math.max(12,Math.min(h-12,p));i?x.lineTo(px,py):x.moveTo(px,py)});x.strokeStyle="#43d6a0";x.lineWidth=2.2;x.stroke()}
+function update(){let d=samples[selected];$("marketName").textContent=selected+" · SAMPLE DATA";$("price").textContent=d.price;$("rsi").textContent=d.rsi;$("macd").textContent=d.macd;$("ma").textContent=d.ma;$("vol").textContent=d.vol;$("trend").textContent=d.trend;$("analysis").textContent=d.note;["M5","M15","M30","H1","H4"].forEach((t,i)=>$("tf"+t).textContent=d.tf[i]);draw(d.seed+["M5","M15","M30","H1","H4"].indexOf(tf)*2);document.querySelectorAll(".market").forEach(b=>b.classList.toggle("active",b.dataset.market===selected))}
+document.querySelectorAll(".market").forEach(b=>b.addEventListener("click",()=>{selected=b.dataset.market;update()}));
+document.querySelectorAll("#timeframes button").forEach(b=>b.addEventListener("click",()=>{tf=b.dataset.tf;document.querySelectorAll("#timeframes button").forEach(q=>q.classList.toggle("active",q===b));update()}));
+window.addEventListener("resize",()=>draw(samples[selected].seed));update();
+</script></body></html>
